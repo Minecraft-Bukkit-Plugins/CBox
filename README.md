@@ -19,8 +19,8 @@
 - /food <player>
    Description: Full food bar of the player or yourself
    
-- /citems 
+- /citems
    Description: Be careful with this. This will remove all items on the ground
   
-- /cchat 
+- /cchat
    Description: Will clear all chat screen, but will not hide anything from server logs
