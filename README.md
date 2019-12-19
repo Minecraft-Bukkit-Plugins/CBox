@@ -31,3 +31,11 @@
 - /cchat
 
    Description: Will clear all chat screen, but will not hide anything from server logs
+
+### Downloads
+
+* v1.3
+
+- [CBox](https://github.com/Minecraft-Bukkit-Plugins/CBox/releases/tag/v1.3) 
+
+
