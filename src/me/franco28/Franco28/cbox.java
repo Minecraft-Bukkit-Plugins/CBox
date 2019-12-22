@@ -20,31 +20,13 @@ public class cbox implements CommandExecutor {
 	public String cmd5 = "cchat";
 	public String cmd6 = "citems";
 	public Player player = null;
-
-	public void errorplayer()
-	{
-        	player.sendMessage(ChatColor.RED + "Jugador no encontrado");
-	}
-	
-	public void selectplayer()
-	{
-      	player.sendMessage(ChatColor.RED + "Por favor seleccione algún jugador");
-	}
-	
-	public void returnplayer(String[] args)
-	{
-    	Player pl = (Player) Bukkit.getServer().getPlayer(args[0]);
-        if (pl == null) {
-        	errorplayer();
-        }  
-	}
 		
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 	     	
 		if (sender instanceof Player){
 
-        		player = (Player) sender;
+        		Player player = (Player) sender;
 
   if (cmd.getName().equalsIgnoreCase(cmd1)) {
 	  if (player.hasPermission(cmd1) && sender.hasPermission(cmd1)) {
@@ -88,14 +70,20 @@ public class cbox implements CommandExecutor {
 			} else {
     			  double health = pl.getHealth(); 
 				if (health != 20.0) {
-				    pl.sendMessage(ChatColor.GREEN + "El jugador " + player.getName() + " te llenó la barra de vida!");
-				    player.sendMessage(ChatColor.GREEN + "El jugador " + pl.getName() + " recibió vida de tu parte!");
+                	if(player.equals(pl)) {
+    				    player.sendMessage(ChatColor.BLUE + "Te llenaste tu barra de vida!");
+                        player.setHealth(20.0);
+                	} else {
+				    pl.sendMessage(ChatColor.BLUE + "El jugador " + player.getName() + " te llenó la barra de vida!");
 				    pl.setHealth(20.0);
-                    player.setHealth(20.0);
-                    } else {
+                	}
+                	} else {
+                    	if(player.equals(pl)) {
+    				    player.sendMessage(ChatColor.GREEN + "Tu barra de vida ya esta llena!");
+				    } else {
     				    pl.sendMessage(ChatColor.GREEN + "Tu barra de vida ya esta llena!");
-			          	player.sendMessage(ChatColor.GREEN + "Tu barra de vida ya esta llena!");
 				    }
+                    }
 			       }
 			}   
 		 	 } else {
@@ -117,12 +105,21 @@ public class cbox implements CommandExecutor {
 			} else {
   			  double food = pl.getFoodLevel(); 
 				if (food != 20.0) {
-				    pl.sendMessage(ChatColor.GREEN + "El jugador " + player.getName() + " te llenó la barra de comida!");
-                    pl.setFoodLevel(20);
-                    player.setFoodLevel(20);
+                	if(player.equals(pl)) {
+    				    player.sendMessage(ChatColor.BLUE + "Te llenaste la barra de tu comida!");
+                        player.setFoodLevel(20);                	
+                	} else {
+    				    pl.sendMessage(ChatColor.BLUE + "El jugador " + player.getName() + " te llenó la barra de comida!");
+                        pl.setFoodLevel(20);
+                	}
+
 				    } else {
-			          	player.sendMessage(ChatColor.GREEN + "Tu barra de comida ya esta llena!");
-			          	pl.sendMessage(ChatColor.GREEN + "Tu barra de comida ya esta llena!");
+	                	if(player.equals(pl)) {
+		                	player.sendMessage(ChatColor.GREEN + "Tu barra de comida ya esta llena!");
+	                	} else {
+		                	pl.sendMessage(ChatColor.GREEN + "Tu barra de comida ya esta llena!");
+	                		
+	                	}			          	
 				    }
 			       }
 			}   
@@ -144,14 +141,24 @@ public class cbox implements CommandExecutor {
 		return false;
 		} else {
 			if (pl.getAllowFlight() == false) {
-			    player.sendMessage(ChatColor.BLUE + "El jugador " + pl.getName() + " ahora puede volar!");
-			    pl.sendMessage(ChatColor.GREEN + "El jugador " + player.getName() + " te habilitó poder volar!");
-			    pl.sendMessage(ChatColor.RED + "Ya puedes volar!");
-			    pl.setAllowFlight(true);
+            	if(player.equals(pl)) {
+    			    player.sendMessage(ChatColor.RED + "Ya puedes volar!");
+    			    player.setAllowFlight(true);                	
+            	} else {
+                	player.sendMessage(ChatColor.BLUE + "El jugador " + pl.getName() + " ahora puede volar!");
+    			    pl.sendMessage(ChatColor.GREEN + "El jugador " + player.getName() + " te habilitó poder volar!");
+    			    pl.setAllowFlight(true);            		
+            	}
+			    
 			    } else {
-			      player.sendMessage(ChatColor.BLUE + "El jugador " + pl.getName() + " ya no puede volar!");
-			      pl.sendMessage(ChatColor.RED + "Ya no puedes volar!");
-			      pl.setAllowFlight(false);
+	            	if(player.equals(pl)) {
+					      player.sendMessage(ChatColor.RED + "Ya no puedes volar!");
+					      player.setAllowFlight(false);
+	            	} else {
+	  			      player.sendMessage(ChatColor.BLUE + "El jugador " + pl.getName() + " ya no puede volar!");
+				      pl.sendMessage(ChatColor.RED + "Ya no puedes volar!");
+				      pl.setAllowFlight(false);
+	            	}
 			    }
 		       }
 		}   
@@ -181,15 +188,31 @@ public class cbox implements CommandExecutor {
          return true;
       }
       
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|---------------------------+=========+--|");
-      Bukkit.broadcastMessage(ChatColor.BOLD + " Los items del suelo fueron borrados      ");
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|---------------------------+=========+--|");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+=========+--|");
+      Bukkit.broadcastMessage(ChatColor.BOLD + " Los items del suelo fueron borrados     ");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+=========+--|");
                   
       World world = Bukkit.getWorld("Mundo");
-
+      World worldnether = Bukkit.getWorld("Mundo_nether");
+      World worldend = Bukkit.getWorld("Mundo_the_end");
+      
       List<Entity> entList = world.getEntities();
-
+      List<Entity> entList_nether = worldnether.getEntities();
+      List<Entity> entList_end = worldend.getEntities();
+      
       for(Entity current : entList){
+          if (current instanceof Item){
+        	  current.remove();
+          } 
+      }
+      
+      for(Entity current : entList_nether){
+          if (current instanceof Item){
+        	  current.remove();
+          } 
+      }
+      
+      for(Entity current : entList_end){
           if (current instanceof Item){
         	  current.remove();
           } 
