@@ -74,6 +74,7 @@ public class cbox implements CommandExecutor {
     				    player.sendMessage(ChatColor.BLUE + "Te llenaste tu barra de vida!");
                         player.setHealth(20.0);
                 	} else {
+                   	player.sendMessage(ChatColor.BLUE + "Le llenaste la barra de vida a " + pl.getName());
 				    pl.sendMessage(ChatColor.BLUE + "El jugador " + player.getName() + " te llenó la barra de vida!");
 				    pl.setHealth(20.0);
                 	}
@@ -109,6 +110,7 @@ public class cbox implements CommandExecutor {
     				    player.sendMessage(ChatColor.BLUE + "Te llenaste la barra de tu comida!");
                         player.setFoodLevel(20);                	
                 	} else {
+                       	player.sendMessage(ChatColor.BLUE + "Le llenaste la barra de comida a " + pl.getName());
     				    pl.sendMessage(ChatColor.BLUE + "El jugador " + player.getName() + " te llenó la barra de comida!");
                         pl.setFoodLevel(20);
                 	}
@@ -177,9 +179,9 @@ public class cbox implements CommandExecutor {
           Bukkit.broadcastMessage("");
       }                
 
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|------------------------+=========+-|");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|------------------------+==========+-|");
       Bukkit.broadcastMessage(ChatColor.BOLD + " El Chat fue borrado por " + sender.getName() + " ");
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|------------------------+=========+-|");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|------------------------+==========+-|");
   }
   
   if (cmd.getName().equalsIgnoreCase(cmd6)) {
@@ -188,9 +190,9 @@ public class cbox implements CommandExecutor {
          return true;
       }
       
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+=========+--|");
-      Bukkit.broadcastMessage(ChatColor.BOLD + " Los items del suelo fueron borrados     ");
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+=========+--|");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+==========+--|");
+      Bukkit.broadcastMessage(ChatColor.BOLD + " Los items del suelo fueron borrados      ");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+==========+--|");
                   
       World world = Bukkit.getWorld("Mundo");
       World worldnether = Bukkit.getWorld("Mundo_nether");
