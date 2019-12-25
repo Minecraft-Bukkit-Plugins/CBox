@@ -1,14 +1,29 @@
 name: Franco28
 author: Franco28
-version: 1.4
+version: 1.5
+api-version: 1.15
 main: me.franco28.Franco28.main
-description: Esto es una caja de comandos (para admins), como por ejemplo, "Health" "Kill". ESTABLE.
+description: Esto es una caja de comandos (para admins), como por ejemplo, "Health" "Kill".
 permission-message: No tienes permisos para usar estos comandos!.
 
 commands:
- kill:
- health:
- food:
- fly:
- cchat:
- citems:
+     kill:
+         description: Mata al jugador que selecciones o a vos mismo.
+ 
+     health:
+         description: Llena la vida del jugador.
+
+     food:
+         description: Llena la comida del jugador.
+    
+     fly:
+         description: Habilita poder volar al jugador.
+
+     cchat:
+         description: Limpia la caja del chat.
+
+     citems:
+         description: Limpia los items en el suelo.
+         
+     thunder:
+         description: Tira un rayo hacia el jugador.

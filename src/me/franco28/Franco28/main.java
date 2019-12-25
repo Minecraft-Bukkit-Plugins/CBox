@@ -15,6 +15,7 @@ public class main extends JavaPlugin {
         getCommand(adminboxP.cmd4).setExecutor(adminboxP);
         getCommand(adminboxP.cmd5).setExecutor(adminboxP);
         getCommand(adminboxP.cmd6).setExecutor(adminboxP);
+        getCommand(adminboxP.cmd7).setExecutor(adminboxP);
     }
 
     public void onDisable() {

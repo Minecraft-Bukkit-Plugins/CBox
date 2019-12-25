@@ -8,7 +8,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class cbox implements CommandExecutor {
@@ -19,6 +24,7 @@ public class cbox implements CommandExecutor {
 	public String cmd4 = "fly";
 	public String cmd5 = "cchat";
 	public String cmd6 = "citems";
+	public String cmd7 = "thunder";
 	public Player player = null;
 		
 	@Override
@@ -220,7 +226,44 @@ public class cbox implements CommandExecutor {
           } 
       }
   }
+  
+  if (cmd.getName().equalsIgnoreCase(cmd7)) {
+	  if (player.hasPermission(cmd7) && sender.hasPermission(cmd7)) {
+		   if (args.length == 0) {
+	       	   player.sendMessage(ChatColor.RED + "Por favor seleccione algún jugador");
+			return true;
+			}
+		   if (args.length == 1) {
+			   Player pl = Bukkit.getServer().getPlayer(args[0]);
+			   if (pl == null) {
+	       	      player.sendMessage(ChatColor.RED + "Jugador no encontrado");
+			return false;
+			} else {
+            	if(player.equals(pl)) {
+			          player.getWorld().strikeLightningEffect(player.getLocation());
+                      player.setHealth(6);
+			          player.sendMessage(ChatColor.DARK_BLUE + "Los dioses se han enojado! Mejor escondete!"); 
+            	} else {
+			          pl.getWorld().strikeLightningEffect(pl.getLocation());
+                      pl.setHealth(6);
+			          pl.sendMessage(ChatColor.DARK_BLUE + "Los dioses se han enojado! Mejor escondete!"); 
+            	}                    
+			       }
+			}   
+		 	 } else {
+		         sender.sendMessage(ChatColor.RED + "No tienes permisos para ejecutar este comando.");
+		 	 }
+  }
+  
 	    }
 		return false;
+	}
+	
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onPlayerD(EntityDamageByEntityEvent event) {
+        if(((EntityDamageByEntityEvent) event).getDamager() instanceof LightningStrike){
+        double finalDamage = (20) - event.getDamage();
+        event.setDamage(finalDamage);
+        }
 	}
 }
