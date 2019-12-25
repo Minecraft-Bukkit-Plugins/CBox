@@ -32,8 +32,12 @@
 
    Description: Will clear all chat screen, but will not hide anything from server logs
 
+- /thunder
+
+   Description: Strike a player with a thunder
+   
 ### Downloads
 
-* v1.3: [CBox](https://github.com/Minecraft-Bukkit-Plugins/CBox/releases/tag/v1.3) 
+* v1.5: [CBox](https://github.com/Minecraft-Bukkit-Plugins/CBox/releases/tag/v1.5) 
 
 
