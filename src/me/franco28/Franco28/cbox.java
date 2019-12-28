@@ -30,7 +30,7 @@ public class cbox implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 	     	
-		if (sender instanceof Player){
+		if (sender instanceof Player) {
 
         		Player player = (Player) sender;
 
@@ -196,9 +196,9 @@ public class cbox implements CommandExecutor {
          return true;
       }
       
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+==========+--|");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|---------------------------+==========+--|");
       Bukkit.broadcastMessage(ChatColor.BOLD + " Los items del suelo fueron borrados      ");
-      Bukkit.broadcastMessage(ChatColor.GOLD + "|--------------------------+==========+--|");
+      Bukkit.broadcastMessage(ChatColor.GOLD + "|---------------------------+==========+--|");
                   
       World world = Bukkit.getWorld("Mundo");
       World worldnether = Bukkit.getWorld("Mundo_nether");
@@ -245,7 +245,7 @@ public class cbox implements CommandExecutor {
 			          player.sendMessage(ChatColor.DARK_BLUE + "Los dioses se han enojado! Mejor escondete!"); 
             	} else {
 			          pl.getWorld().strikeLightningEffect(pl.getLocation());
-                      pl.setHealth(6);
+                      pl.setHealth(3);
 			          pl.sendMessage(ChatColor.DARK_BLUE + "Los dioses se han enojado! Mejor escondete!"); 
             	}                    
 			       }
